@@ -1,0 +1,10 @@
+.product-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.product-image img {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+}
