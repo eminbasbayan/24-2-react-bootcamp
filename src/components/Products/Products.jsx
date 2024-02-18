@@ -9,8 +9,10 @@ function Products() {
           alt="image"
         />
       </div>
-      <strong className="product-title">Kebap</strong>
-      <span className="product-price">250₺</span>
+      <div className="product-info">
+        <strong className="product-title">Kebap</strong>
+        <span className="product-price">250₺</span>
+      </div>
     </div>
   );
 }
