@@ -5,7 +5,7 @@ import "./Products.css";
 function Products() {
   return (
     <div className="products-wrapper">
-      {productsData.map((pItem, index) => {
+      {productsData.map((pItem) => {
         return (
           <ProductItem
             key={pItem._id}

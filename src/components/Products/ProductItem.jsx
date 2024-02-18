@@ -1,7 +1,12 @@
 import PropTypes from "prop-types";
 import "./ProductItem.css";
+import Button from "../UI/Button";
 
 function ProductItem(props) {
+  function handleClick() {
+    console.log("tıklandı!");
+  }
+
   return (
     <div className="product-item">
       <div className="product-image">
@@ -10,6 +15,9 @@ function ProductItem(props) {
       <div className="product-info">
         <strong className="product-title">{props.productTitle}</strong>
         <span className="product-price">{props.productPrice}₺</span>
+        <Button onClick={handleClick} danger>
+          Sepete Ekle
+        </Button>
       </div>
     </div>
   );
