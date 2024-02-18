@@ -1,0 +1,21 @@
+.product-item {
+  display: flex;
+  border: 1px solid #e5e7eb;
+  flex-direction: column;
+  width: 150px;
+}
+
+.product-image {
+  display: flex;
+}
+
+.product-image img {
+  width: 100%;
+  object-fit: cover;
+}
+
+.product-info {
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+}
