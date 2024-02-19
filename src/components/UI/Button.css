@@ -5,3 +5,11 @@
 .success {
   background-color: green !important;
 }
+
+button {
+  font-size: 14px !important;
+  display: flex;
+  column-gap: 4px;
+  justify-content: center;
+  align-items: center;
+}

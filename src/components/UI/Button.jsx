@@ -2,14 +2,14 @@ import PropTypes from "prop-types";
 import "./Button.css";
 
 function Button(props) {
+  const { danger, success, iconName, onClick, children } = props;
   return (
     <button
-      className={`${props.danger ? "danger" : ""} ${
-        props.success ? "success" : ""
-      }`}
-      onClick={props.onClick}
+      className={`${danger ? "danger" : ""} ${success ? "success" : ""}`}
+      onClick={onClick}
     >
-      {props.children}
+      {iconName && <i className={`bi bi-${iconName}`}></i>}
+      {children}
     </button>
   );
 }
@@ -21,4 +21,5 @@ Button.propTypes = {
   onClick: PropTypes.func,
   danger: PropTypes.bool,
   success: PropTypes.bool,
+  iconName: PropTypes.string,
 };
