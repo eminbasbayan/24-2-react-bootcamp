@@ -1,4 +1,5 @@
 import Counter from "./components/Counter";
+import Form from "./components/Form";
 import Products from "./components/Products/Products";
 
 function App() {
@@ -7,6 +8,7 @@ function App() {
       <h1>App Project</h1>
       {/* <Products /> */}
       <Counter />
+      <Form />
     </div>
   );
 }
