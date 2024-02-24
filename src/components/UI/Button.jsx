@@ -5,7 +5,9 @@ function Button(props) {
   const { danger, success, iconName, onClick, children } = props;
   return (
     <button
-      className={`${danger ? "danger" : ""} ${success ? "success" : ""}`}
+      className={`${props.className} ${danger ? "danger" : ""} ${
+        success ? "success" : ""
+      }`}
       onClick={onClick}
     >
       {iconName && <i className={`bi bi-${iconName}`}></i>}
@@ -22,4 +24,5 @@ Button.propTypes = {
   danger: PropTypes.bool,
   success: PropTypes.bool,
   iconName: PropTypes.string,
+  className: PropTypes.string,
 };

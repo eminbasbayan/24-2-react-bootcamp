@@ -2,7 +2,6 @@
   display: flex;
   border: 1px solid #e5e7eb;
   flex-direction: column;
-  width: 150px;
 }
 
 .product-image {

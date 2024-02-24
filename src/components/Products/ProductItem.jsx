@@ -21,8 +21,10 @@ function ProductItem(props) {
       <div className="product-info">
         <strong className="product-title">{props.parentTitle}</strong>
         <span className="product-price">{props.productPrice}₺</span>
-        <button onClick={handleClick}>Title Değiştir!</button>
-        <Button iconName={"basket"} success>
+        <button onClick={handleClick} className="mt-1">
+          Title Değiştir!
+        </button>
+        <Button iconName={"basket"} success className="mt-2">
           Sepete Ekle
         </Button>
       </div>
