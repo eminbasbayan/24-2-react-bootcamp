@@ -1,10 +1,16 @@
+// import { useState } from "react";
 import PropTypes from "prop-types";
-import "./ProductItem.css";
+
 import Button from "../UI/Button";
 
+import "./ProductItem.css";
+
 function ProductItem(props) {
+  // const [title, setTitle] = useState("Elma");
+
   function handleClick() {
-    console.log("tıklandı!");
+    // setTitle(props.productTitle);
+    props.setParentTitle("Armut");
   }
 
   return (
@@ -13,9 +19,10 @@ function ProductItem(props) {
         <img src={props.productImage} alt="image" />
       </div>
       <div className="product-info">
-        <strong className="product-title">{props.productTitle}</strong>
+        <strong className="product-title">{props.parentTitle}</strong>
         <span className="product-price">{props.productPrice}₺</span>
-        <Button onClick={handleClick} iconName={"basket"} success>
+        <button onClick={handleClick}>Title Değiştir!</button>
+        <Button iconName={"basket"} success>
           Sepete Ekle
         </Button>
       </div>
@@ -29,4 +36,6 @@ ProductItem.propTypes = {
   productImage: PropTypes.string,
   productTitle: PropTypes.string,
   productPrice: PropTypes.number,
+  parentTitle: PropTypes.string,
+  setParentTitle: PropTypes.func,
 };
