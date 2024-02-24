@@ -1,9 +1,40 @@
 import { useState } from "react";
 
 function FormProduct() {
-  const [title, setTitle] = useState("");
-  const [price, setPrice] = useState("");
-  const [imgLink, setImgLink] = useState("");
+  const [productInput, setProductInput] = useState({
+    title: "",
+    price: "",
+    imgLink: "",
+  });
+
+  //   const [title, setTitle] = useState("");
+  //   const [price, setPrice] = useState("");
+  //   const [imgLink, setImgLink] = useState("");
+
+  function handleTitleChange(e) {
+    setProductInput({
+      ...productInput,
+      title: e.target.value,
+    });
+  }
+
+  function handlePriceChange(e) {
+    setProductInput({
+      ...productInput,
+      price: e.target.value,
+    });
+  }
+
+  function handleImageChange(e) {
+    setProductInput({
+      ...productInput,
+      imgLink: e.target.value,
+    });
+  }
+
+  console.log(productInput.title);
+  console.log(productInput.price);
+  console.log(productInput.imgLink);
 
   return (
     <form className="form-product bg-purple-600 p-4 border w-[400px] mb-10 rounded-lg">
@@ -16,7 +47,7 @@ function FormProduct() {
               type="text"
               placeholder="Bir ürün adı giriniz..."
               className="p-1 rounded"
-              onChange={(event) => setTitle(event.target.value)}
+              onChange={handleTitleChange}
             />
           </label>
         </div>
@@ -27,7 +58,7 @@ function FormProduct() {
               type="text"
               placeholder="Bir ürün fiyatı giriniz..."
               className="p-1 rounded"
-              onChange={(e) => setPrice(e.target.value)}
+              onChange={handlePriceChange}
             />
           </label>
         </div>
@@ -38,7 +69,7 @@ function FormProduct() {
               type="text"
               placeholder="Bir ürün görsel linki giriniz..."
               className="p-1 rounded"
-              onChange={(e) => setImgLink(e.target.value)}
+              onChange={handleImageChange}
             />
           </label>
         </div>
