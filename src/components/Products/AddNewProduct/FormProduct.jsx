@@ -1,4 +1,5 @@
 import { useState } from "react";
+import ProductFormItem from "./ProductFormItem";
 
 function FormProduct() {
   const [productInput, setProductInput] = useState({
@@ -14,46 +15,41 @@ function FormProduct() {
     });
   }
 
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    const productItem = productInput;
+    console.log(productItem);
+  }
+
   return (
-    <form className="form-product bg-purple-600 p-4 border w-[400px] mb-10 rounded-lg">
+    <form
+      className="form-product bg-purple-600 p-4 border w-[400px] mb-10 rounded-lg"
+      onSubmit={handleSubmit}
+    >
       <h3 className="text-3xl font-bold mb-2">Yeni Ürün Ekle!</h3>
       <div className="form-item-wrapper flex flex-col gap-y-2">
-        <div className="form-item">
-          <label className="inline-flex flex-col">
-            <strong className="text-black !text-[#ccc]">Product Title</strong>
-            <input
-              type="text"
-              placeholder="Bir ürün adı giriniz..."
-              className="p-1 rounded"
-              name="title"
-              onChange={handleChange}
-            />
-          </label>
-        </div>
-        <div className="form-item">
-          <label className="inline-flex flex-col">
-            <strong className="text-black !text-[#ccc]">Product Price</strong>
-            <input
-              type="text"
-              placeholder="Bir ürün fiyatı giriniz..."
-              className="p-1 rounded"
-              name="price"
-              onChange={handleChange}
-            />
-          </label>
-        </div>
-        <div className="form-item">
-          <label className="inline-flex flex-col">
-            <strong className="text-black !text-[#ccc]">Product Image</strong>
-            <input
-              type="text"
-              placeholder="Bir ürün görsel linki giriniz..."
-              className="p-1 rounded"
-              name="imgLink"
-              onChange={handleChange}
-            />
-          </label>
-        </div>
+        <ProductFormItem
+          onChange={handleChange}
+          name={"title"}
+          placeholder={"Bir ürün ismi giriniz."}
+          title={"Product Title"}
+          type={"text"}
+        />
+        <ProductFormItem
+          onChange={handleChange}
+          name={"price"}
+          placeholder={"Bir ürün fiyatı giriniz."}
+          title={"Product Price"}
+          type={"number"}
+        />
+        <ProductFormItem
+          onChange={handleChange}
+          name={"imgLink"}
+          placeholder={"Bir ürün linki giriniz."}
+          title={"Product Image Link"}
+          type={"text"}
+        />
       </div>
       <button className="mt-2 w-48">Ekle</button>
     </form>
