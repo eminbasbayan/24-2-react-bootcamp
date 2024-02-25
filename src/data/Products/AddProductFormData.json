@@ -1,0 +1,28 @@
+{
+  "productFormData": [
+    {
+      "name": "title",
+      "placeholder": "Bir ürün ismi giriniz.",
+      "label": "Product Title",
+      "type": "text"
+    },
+    {
+      "name": "price",
+      "placeholder": "Bir ürün fiyatı giriniz.",
+      "label": "Product Price",
+      "type": "number"
+    },
+    {
+      "name": "imgLink",
+      "placeholder": "Bir ürün linki giriniz.",
+      "label": "Product Image Link",
+      "type": "text"
+    },
+    {
+      "name": "category",
+      "placeholder": "Bir ürün kategorisi giriniz.",
+      "label": "Product Category",
+      "type": "text"
+    }
+  ]
+}
