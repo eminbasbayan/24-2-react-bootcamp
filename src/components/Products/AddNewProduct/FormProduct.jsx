@@ -13,6 +13,7 @@ const initialState = {
 
 function FormProduct({ productData, setProductData }) {
   const [productInput, setProductInput] = useState(initialState);
+  const [isShowError, setIsShowError] = useState(false);
 
   function handleChange({ target: { name, value } }) {
     setProductInput({
@@ -30,6 +31,7 @@ function FormProduct({ productData, setProductData }) {
 
     if (!isFormValid) {
       console.error("Tüm alanlar dolu ve boş karakter içermemelidir.");
+      setIsShowError(true);
       return;
     }
 
@@ -60,6 +62,12 @@ function FormProduct({ productData, setProductData }) {
         ))}
       </div>
       <button className="mt-2 w-48">Ekle</button>
+      {isShowError && (
+        <>
+          <p>Tüm alanlar dolu ve boş karakter içermemelidir.</p>
+          <button onClick={() => setIsShowError(false)}>Kapat</button>
+        </>
+      )}
     </form>
   );
 }
