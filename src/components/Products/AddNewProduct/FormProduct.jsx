@@ -4,13 +4,15 @@ import formFields from "../../../data/Products/AddProductFormData.json";
 
 import PropTypes from "prop-types";
 
+const initialState = {
+  label: "",
+  price: "",
+  imgLink: "",
+  category: "",
+};
+
 function FormProduct({ productData, setProductData }) {
-  const [productInput, setProductInput] = useState({
-    label: "",
-    price: "",
-    imgLink: "",
-    category: "",
-  });
+  const [productInput, setProductInput] = useState(initialState);
 
   function handleChange({ target: { name, value } }) {
     setProductInput({
@@ -31,16 +33,6 @@ function FormProduct({ productData, setProductData }) {
       return;
     }
 
-    // if (
-    //   !productInput.label.trim() ||
-    //   !productInput.price.trim() ||
-    //   !productInput.imgLink.trim() ||
-    //   !productInput.category.trim()
-    // ) {
-    //   console.error("Tüm alanlar dolu ve boş karakter içermemelidir.");
-    //   return;
-    // }
-
     const newProductInput = {
       _id: productData.length + 1,
       ...productInput,
@@ -48,9 +40,8 @@ function FormProduct({ productData, setProductData }) {
       price: Number(productInput.price),
     };
     setProductData([newProductInput, ...productData]);
+    setProductInput(initialState);
   }
-
-  console.log(productInput);
 
   return (
     <form
@@ -63,6 +54,7 @@ function FormProduct({ productData, setProductData }) {
           <ProductFormItem
             key={field.name}
             onChange={handleChange}
+            value={productInput[field.name]}
             {...field}
           />
         ))}

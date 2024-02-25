@@ -11,6 +11,7 @@ const ProductFormItem = (props) => {
           className="p-1 rounded"
           name={props.name}
           onChange={props.onChange}
+          value={props.value}
         />
       </label>
     </div>
@@ -24,5 +25,6 @@ ProductFormItem.propTypes = {
   type: PropTypes.string,
   placeholder: PropTypes.string,
   name: PropTypes.string,
+  value: PropTypes.string,
   onChange: PropTypes.func,
 };
