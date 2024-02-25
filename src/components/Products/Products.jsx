@@ -19,6 +19,7 @@ function Products() {
               productTitle={pItem.title}
               productImage={pItem.img}
               productPrice={pItem.price}
+              category={pItem.category}
               parentTitle={parentTitle}
               setParentTitle={setParentTitle}
             />

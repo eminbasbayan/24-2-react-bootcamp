@@ -22,8 +22,10 @@ function FormProduct({ productData, setProductData }) {
     e.preventDefault();
 
     const newProductInput = {
+      id: productData.length + 1,
       ...productInput,
       img: productInput.imgLink,
+      price: Number(productInput.price),
     };
     setProductData([newProductInput, ...productData]);
   }

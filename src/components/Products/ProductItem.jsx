@@ -18,6 +18,7 @@ function ProductItem(props) {
         <img src={props.productImage} alt="image" />
       </div>
       <div className="product-info">
+        <span>{props.category}</span>
         <strong className="product-title">{props.parentTitle}</strong>
         <span className="product-price">{props.productPrice}₺</span>
         <button onClick={handleClick} className="mt-1">
@@ -38,5 +39,6 @@ ProductItem.propTypes = {
   productTitle: PropTypes.string,
   productPrice: PropTypes.number,
   parentTitle: PropTypes.string,
+  category: PropTypes.string,
   setParentTitle: PropTypes.func,
 };
