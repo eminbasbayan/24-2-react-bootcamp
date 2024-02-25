@@ -1,7 +1,7 @@
 {
   "productFormData": [
     {
-      "name": "title",
+      "name": "label",
       "placeholder": "Bir ürün ismi giriniz.",
       "label": "Product Title",
       "type": "text"

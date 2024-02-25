@@ -22,6 +22,25 @@ function FormProduct({ productData, setProductData }) {
   function handleSubmit(e) {
     e.preventDefault();
 
+    const isFormValid = Object.values(productInput).every(
+      (value) => value.trim() !== ""
+    );
+
+    if (!isFormValid) {
+      console.error("Tüm alanlar dolu ve boş karakter içermemelidir.");
+      return;
+    }
+
+    // if (
+    //   !productInput.label.trim() ||
+    //   !productInput.price.trim() ||
+    //   !productInput.imgLink.trim() ||
+    //   !productInput.category.trim()
+    // ) {
+    //   console.error("Tüm alanlar dolu ve boş karakter içermemelidir.");
+    //   return;
+    // }
+
     const newProductInput = {
       _id: productData.length + 1,
       ...productInput,
@@ -29,13 +48,9 @@ function FormProduct({ productData, setProductData }) {
       price: Number(productInput.price),
     };
     setProductData([newProductInput, ...productData]);
-    setProductInput({
-      label: "",
-      price: "",
-      imgLink: "",
-      category: "",
-    });
   }
+
+  console.log(productInput);
 
   return (
     <form
