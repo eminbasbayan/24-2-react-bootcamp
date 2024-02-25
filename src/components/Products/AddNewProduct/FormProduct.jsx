@@ -3,6 +3,7 @@ import ProductFormItem from "./ProductFormItem";
 import formFields from "../../../data/Products/AddProductFormData.json";
 
 import PropTypes from "prop-types";
+import ErrorModal from "../../UI/ErrorModal";
 
 const initialState = {
   label: "",
@@ -62,12 +63,11 @@ function FormProduct({ productData, setProductData }) {
         ))}
       </div>
       <button className="mt-2 w-48">Ekle</button>
-      {isShowError && (
-        <>
-          <p>Tüm alanlar dolu ve boş karakter içermemelidir.</p>
-          <button onClick={() => setIsShowError(false)}>Kapat</button>
-        </>
-      )}
+      <ErrorModal
+        isShowError={isShowError}
+        setIsShowError={setIsShowError}
+        message="Tüm alanlar dolu ve boş karakter içermemelidir."
+      />
     </form>
   );
 }
