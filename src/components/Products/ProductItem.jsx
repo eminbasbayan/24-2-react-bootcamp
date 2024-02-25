@@ -6,12 +6,6 @@ import Button from "../UI/Button";
 import "./ProductItem.css";
 
 function ProductItem(props) {
-  // const [title, setTitle] = useState("Elma");
-
-  function handleClick() {
-    // setTitle(props.productTitle);
-    props.setParentTitle("Armut");
-  }
   return (
     <div className="product-item">
       <div className="product-image">
@@ -19,11 +13,8 @@ function ProductItem(props) {
       </div>
       <div className="product-info">
         <span>{props.category}</span>
-        <strong className="product-title">{props.parentTitle}</strong>
+        <strong className="product-title">{props.title}</strong>
         <span className="product-price">{props.productPrice}₺</span>
-        <button onClick={handleClick} className="mt-1">
-          Title Değiştir!
-        </button>
         <Button iconName={"basket"} success className="mt-2">
           Sepete Ekle
         </Button>
@@ -39,6 +30,7 @@ ProductItem.propTypes = {
   productTitle: PropTypes.string,
   productPrice: PropTypes.number,
   parentTitle: PropTypes.string,
+  title: PropTypes.string,
   category: PropTypes.string,
   setParentTitle: PropTypes.func,
 };

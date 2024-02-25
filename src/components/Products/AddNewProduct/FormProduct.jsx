@@ -6,9 +6,10 @@ import PropTypes from "prop-types";
 
 function FormProduct({ productData, setProductData }) {
   const [productInput, setProductInput] = useState({
-    title: "",
+    label: "",
     price: "",
     imgLink: "",
+    category: "",
   });
 
   function handleChange({ target: { name, value } }) {
@@ -28,6 +29,12 @@ function FormProduct({ productData, setProductData }) {
       price: Number(productInput.price),
     };
     setProductData([newProductInput, ...productData]);
+    setProductInput({
+      label: "",
+      price: "",
+      imgLink: "",
+      category: "",
+    });
   }
 
   return (

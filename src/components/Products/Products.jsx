@@ -5,7 +5,6 @@ import { useState } from "react";
 import FormProduct from "./AddNewProduct/FormProduct.jsx";
 
 function Products() {
-  const [parentTitle, setParentTitle] = useState("Elma");
   const [productData, setProductData] = useState(productsData);
 
   return (
@@ -20,8 +19,6 @@ function Products() {
               productImage={pItem.img}
               productPrice={pItem.price}
               category={pItem.category}
-              parentTitle={parentTitle}
-              setParentTitle={setParentTitle}
             />
           );
         })}
