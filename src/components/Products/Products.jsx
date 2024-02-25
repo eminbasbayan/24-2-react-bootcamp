@@ -6,12 +6,13 @@ import FormProduct from "./AddNewProduct/FormProduct.jsx";
 
 function Products() {
   const [parentTitle, setParentTitle] = useState("Elma");
+  const [productData, setProductData] = useState(productsData);
 
   return (
     <div className="products-container">
-      <FormProduct />
+      <FormProduct productData={productData} setProductData={setProductData} />
       <div className="products-wrapper">
-        {productsData.map((pItem) => {
+        {productData.map((pItem) => {
           return (
             <ProductItem
               key={pItem._id}

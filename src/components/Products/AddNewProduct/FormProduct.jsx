@@ -2,7 +2,9 @@ import { useState } from "react";
 import ProductFormItem from "./ProductFormItem";
 import formFields from "../../../data/Products/AddProductFormData.json";
 
-function FormProduct() {
+import PropTypes from "prop-types";
+
+function FormProduct({ productData, setProductData }) {
   const [productInput, setProductInput] = useState({
     title: "",
     price: "",
@@ -19,8 +21,11 @@ function FormProduct() {
   function handleSubmit(e) {
     e.preventDefault();
 
-    const productItem = productInput;
-    console.log(productItem);
+    const newProductInput = {
+      ...productInput,
+      img: productInput.imgLink,
+    };
+    setProductData([newProductInput, ...productData]);
   }
 
   return (
@@ -44,3 +49,8 @@ function FormProduct() {
 }
 
 export default FormProduct;
+
+FormProduct.propTypes = {
+  productData: PropTypes.array,
+  setProductData: PropTypes.func,
+};

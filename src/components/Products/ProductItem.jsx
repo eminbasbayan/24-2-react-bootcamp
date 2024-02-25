@@ -12,7 +12,6 @@ function ProductItem(props) {
     // setTitle(props.productTitle);
     props.setParentTitle("Armut");
   }
-
   return (
     <div className="product-item">
       <div className="product-image">
