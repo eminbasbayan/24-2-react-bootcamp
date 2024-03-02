@@ -63,6 +63,7 @@ function FormProduct({ productData, setProductData }) {
         ))}
       </div>
       <button className="mt-2 w-48">Ekle</button>
+      <button className="mt-2 w-48">Form Aç!</button>
       <ErrorModal
         isShowError={isShowError}
         setIsShowError={setIsShowError}

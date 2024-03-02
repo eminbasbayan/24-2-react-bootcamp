@@ -1,9 +1,23 @@
 import PropTypes from "prop-types";
+import { useRef } from "react";
 import ReactDom from "react-dom";
 
 const ErrorModal = (props) => {
+  const inputRef = useRef();
+  const buttonRef = useRef();
+
+  console.log(buttonRef);
+
   if (!props.isShowError) {
     return;
+  }
+
+  function handleClick() {
+    console.log(inputRef.current.placeholder);
+    console.log(inputRef.current.type);
+    console.log(inputRef.current.value);
+    console.log(inputRef);
+    inputRef.current.focus();
   }
 
   return ReactDom.createPortal(
@@ -21,6 +35,21 @@ const ErrorModal = (props) => {
               </div>
               <div className="p-4 text-black">
                 <p>{props.message}</p>
+                <input
+                  type="text"
+                  defaultValue={"Emin"}
+                  placeholder="Lütfen Adınızı Giriniz!"
+                  className="text-white"
+                  ref={inputRef}
+                />
+                <button
+                  className="text-white mt-10"
+                  onClick={handleClick}
+                  ref={buttonRef}
+                >
+                  Input`a Focuslan!
+                  <span>Deneme</span>
+                </button>
               </div>
               <div className="border-t px-4 py-2 flex justify-end">
                 <button
