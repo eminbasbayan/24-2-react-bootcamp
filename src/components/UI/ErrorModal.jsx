@@ -6,8 +6,6 @@ const ErrorModal = (props) => {
   const inputRef = useRef();
   const buttonRef = useRef();
 
-  console.log(buttonRef);
-
   if (!props.isShowError) {
     return;
   }

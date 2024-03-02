@@ -42,7 +42,8 @@ function FormProduct({ productData, setProductData }) {
       img: productInput.imgLink,
       price: Number(productInput.price),
     };
-    setProductData([newProductInput, ...productData]);
+    // setProductData([newProductInput, ...productData]);
+    setProductData((prevState) => [newProductInput, ...prevState]);
     setProductInput(initialState);
   }
 
