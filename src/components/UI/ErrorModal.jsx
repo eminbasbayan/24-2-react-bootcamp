@@ -1,13 +1,14 @@
 import PropTypes from "prop-types";
+import ReactDom from "react-dom";
 
 const ErrorModal = (props) => {
   if (!props.isShowError) {
     return;
   }
 
-  return (
+  return ReactDom.createPortal(
     <div className="error-modal">
-      <div className="flex justify-center items-center h-screen">
+      <div className="flex justify-center items-center h-screen absolute">
         <div>
           <div className="fixed inset-0 px-2 z-10 overflow-hidden flex items-center justify-center">
             <div
@@ -33,7 +34,8 @@ const ErrorModal = (props) => {
           </div>
         </div>
       </div>
-    </div>
+    </div>,
+    document.getElementById("modal")
   );
 };
 
