@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import ReactDom from "react-dom";
-import ClassTimer from "../ClassTimer";
+import Timer from "../Timer";
 
 const ErrorModal = (props) => {
   if (!props.isShowError) {
@@ -9,7 +9,6 @@ const ErrorModal = (props) => {
 
   return ReactDom.createPortal(
     <div className="error-modal">
-      <ClassTimer />
       <div className="flex justify-center items-center h-screen absolute">
         <div>
           <div className="fixed inset-0 px-2 z-10 overflow-hidden flex items-center justify-center">
@@ -23,6 +22,7 @@ const ErrorModal = (props) => {
               </div>
               <div className="p-4 text-black">
                 <p>{props.message}</p>
+                <Timer />
               </div>
               <div className="border-t px-4 py-2 flex justify-end">
                 <button
