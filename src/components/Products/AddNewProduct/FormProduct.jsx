@@ -5,15 +5,15 @@ import formFields from "../../../data/Products/AddProductFormData.json";
 import PropTypes from "prop-types";
 import ErrorModal from "../../UI/ErrorModal";
 
-const initialState = {
-  label: "",
-  price: "",
-  imgLink: "",
-  category: "",
-};
-
-function FormProduct({ productData, setProductData }) {
-  const [productInput, setProductInput] = useState(initialState);
+function FormProduct({
+  productData,
+  setProductData,
+  isUpdateMode,
+  productInput,
+  setProductInput,
+  initialState,
+  updatingProductId,
+}) {
   const [isShowError, setIsShowError] = useState(false);
 
   function handleChange({ target: { name, value } }) {
@@ -25,7 +25,7 @@ function FormProduct({ productData, setProductData }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-
+    console.log(productInput);
     const isFormValid = Object.values(productInput).every(
       (value) => value.trim() !== ""
     );
@@ -36,15 +36,30 @@ function FormProduct({ productData, setProductData }) {
       return;
     }
 
-    const newProductInput = {
-      _id: productData.length + 1,
-      ...productInput,
-      img: productInput.imgLink,
-      price: Number(productInput.price),
-    };
-    // setProductData([newProductInput, ...productData]);
-    setProductData((prevState) => [newProductInput, ...prevState]);
-    setProductInput(initialState);
+    if (isUpdateMode) {
+      // Ürün Güncelleme
+      const updatedProduct = productData.map((product) => {
+        if (product._id === updatingProductId) {
+          return { ...product, ...productInput };
+        } else {
+          return product;
+        }
+      });
+
+      setProductData(updatedProduct);
+    } else {
+      // Yeni Ürün Ekle
+      const newProductInput = {
+        _id: String(productData.length + 1),
+        ...productInput,
+        img: productInput.imgLink,
+        price: Number(productInput.price),
+        category: productInput.category,
+      };
+      // setProductData([newProductInput, ...productData]);
+      setProductData((prevState) => [newProductInput, ...prevState]);
+      setProductInput(initialState);
+    }
   }
 
   return (
@@ -52,7 +67,9 @@ function FormProduct({ productData, setProductData }) {
       className="form-product bg-purple-600 p-4 border w-[400px] mb-10 rounded-lg"
       onSubmit={handleSubmit}
     >
-      <h3 className="text-3xl font-bold mb-2">Yeni Ürün Ekle!</h3>
+      <h3 className="text-3xl font-bold mb-2">
+        {isUpdateMode ? "Ürünü Güncelle" : "Yeni Ürün Ekle!"}{" "}
+      </h3>
       <div className="form-item-wrapper flex flex-col gap-y-2">
         {formFields.productFormData.map((field) => (
           <ProductFormItem
@@ -63,7 +80,12 @@ function FormProduct({ productData, setProductData }) {
           />
         ))}
       </div>
-      <button className="mt-2 w-48">Ekle</button>
+      {isUpdateMode ? (
+        <button className="mt-2 w-48 bg-green-500">Güncelle</button>
+      ) : (
+        <button className="mt-2 w-48">Ekle</button>
+      )}
+
       <ErrorModal
         isShowError={isShowError}
         setIsShowError={setIsShowError}
@@ -78,4 +100,9 @@ export default FormProduct;
 FormProduct.propTypes = {
   productData: PropTypes.array,
   setProductData: PropTypes.func,
+  isUpdateMode: PropTypes.bool,
+  productInput: PropTypes.object,
+  setProductInput: PropTypes.func,
+  initialState: PropTypes.object,
+  updatingProductId: PropTypes.string,
 };

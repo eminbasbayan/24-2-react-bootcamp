@@ -4,7 +4,7 @@ const ProductFormItem = (props) => {
   return (
     <div className="form-item">
       <label className="inline-flex flex-col">
-        <strong className="text-black !text-[#ccc]">{props.label}</strong>
+        <strong className="text-black !text-[#ccc]">{props.title}</strong>
         <input
           type={props.type}
           placeholder={props.placeholder}
@@ -21,10 +21,10 @@ const ProductFormItem = (props) => {
 export default ProductFormItem;
 
 ProductFormItem.propTypes = {
-  label: PropTypes.string,
+  title: PropTypes.string,
   type: PropTypes.string,
   placeholder: PropTypes.string,
   name: PropTypes.string,
-  value: PropTypes.string,
+  value: PropTypes.string || PropTypes.number,
   onChange: PropTypes.func,
 };

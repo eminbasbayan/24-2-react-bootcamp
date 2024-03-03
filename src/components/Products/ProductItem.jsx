@@ -18,7 +18,12 @@ function ProductItem(props) {
         <Button iconName={"basket"} success className={"mt-2"}>
           Sepete Ekle
         </Button>
-        <Button iconName={"basket"} info className="my-2">
+        <Button
+          iconName={"basket"}
+          info
+          className="my-2"
+          onClick={() => props.handleUpdateClick(props._id)}
+        >
           Güncelle
         </Button>
         <Button
@@ -45,4 +50,6 @@ ProductItem.propTypes = {
   setParentTitle: PropTypes.func,
   _id: PropTypes.string,
   handleDeleteItem: PropTypes.func,
+  setIsUpdateMode: PropTypes.func,
+  handleUpdateClick: PropTypes.func,
 };
