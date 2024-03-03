@@ -15,8 +15,15 @@ function ProductItem(props) {
         <span>{props.category}</span>
         <strong className="product-title">{props.title}</strong>
         <span className="product-price">{props.productPrice}₺</span>
-        <Button iconName={"basket"} success className="mt-2">
+        <Button iconName={"basket"} success className="my-2">
           Sepete Ekle
+        </Button>
+        <Button
+          iconName={"trash"}
+          danger
+          onClick={() => props.handleDeleteItem(props._id)}
+        >
+          Sil
         </Button>
       </div>
     </div>
@@ -33,4 +40,6 @@ ProductItem.propTypes = {
   title: PropTypes.string,
   category: PropTypes.string,
   setParentTitle: PropTypes.func,
+  _id: PropTypes.string,
+  handleDeleteItem: PropTypes.func,
 };

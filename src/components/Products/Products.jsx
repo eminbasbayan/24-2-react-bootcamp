@@ -7,6 +7,13 @@ import FormProduct from "./AddNewProduct/FormProduct.jsx";
 function Products() {
   const [productData, setProductData] = useState(productsData);
 
+  function handleDeleteItem(id) {
+    const allProducts = productData;
+
+    const filteredProduct = allProducts.filter(({ _id }) => _id !== id);
+    setProductData(filteredProduct);
+  }
+
   return (
     <div className="products-container">
       <FormProduct productData={productData} setProductData={setProductData} />
@@ -19,6 +26,8 @@ function Products() {
               productImage={pItem.img}
               productPrice={pItem.price}
               category={pItem.category}
+              handleDeleteItem={handleDeleteItem}
+              {...pItem}
             />
           );
         })}
