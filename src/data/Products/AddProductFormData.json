@@ -13,7 +13,7 @@
       "type": "number"
     },
     {
-      "name": "imgLink",
+      "name": "img",
       "placeholder": "Bir ürün linki giriniz.",
       "label": "Product Image Link",
       "type": "text"

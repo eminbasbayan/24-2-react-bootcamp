@@ -13,6 +13,7 @@ function FormProduct({
   setProductInput,
   initialState,
   updatingProductId,
+  resetForm,
 }) {
   const [isShowError, setIsShowError] = useState(false);
 
@@ -47,12 +48,13 @@ function FormProduct({
       });
 
       setProductData(updatedProduct);
+      resetForm();
     } else {
       // Yeni Ürün Ekle
       const newProductInput = {
         _id: String(productData.length + 1),
         ...productInput,
-        img: productInput.imgLink,
+        img: productInput.img,
         price: Number(productInput.price),
         category: productInput.category,
       };
@@ -105,4 +107,5 @@ FormProduct.propTypes = {
   setProductInput: PropTypes.func,
   initialState: PropTypes.object,
   updatingProductId: PropTypes.string,
+  resetForm: PropTypes.func,
 };

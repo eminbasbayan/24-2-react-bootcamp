@@ -7,7 +7,7 @@ import FormProduct from "./AddNewProduct/FormProduct.jsx";
 const initialState = {
   title: "",
   price: "",
-  imgLink: "",
+  img: "",
   category: "",
 };
 
@@ -33,9 +33,15 @@ function Products() {
     setProductInput({
       title: productToBeUpdated.title,
       price: String(productToBeUpdated.price),
-      imgLink: productToBeUpdated.img,
+      img: productToBeUpdated.img,
       category: productToBeUpdated.category,
     });
+  }
+
+  function resetForm() {
+    setIsUpdateMode(false);
+    setProductInput(initialState);
+    setUpdatingProductId(null);
   }
 
   return (
@@ -47,6 +53,7 @@ function Products() {
         productInput={productInput}
         setProductInput={setProductInput}
         updatingProductId={updatingProductId}
+        resetForm={resetForm}
         initialState={initialState}
       />
       <div className="products-wrapper">

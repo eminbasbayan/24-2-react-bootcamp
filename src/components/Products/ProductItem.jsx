@@ -43,7 +43,7 @@ export default ProductItem;
 ProductItem.propTypes = {
   productImage: PropTypes.string,
   productTitle: PropTypes.string,
-  productPrice: PropTypes.number,
+  productPrice: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   parentTitle: PropTypes.string,
   title: PropTypes.string,
   category: PropTypes.string,
