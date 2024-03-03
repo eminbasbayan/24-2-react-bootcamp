@@ -15,8 +15,11 @@ function ProductItem(props) {
         <span>{props.category}</span>
         <strong className="product-title">{props.title}</strong>
         <span className="product-price">{props.productPrice}₺</span>
-        <Button iconName={"basket"} success className="my-2">
+        <Button iconName={"basket"} success className={"mt-2"}>
           Sepete Ekle
+        </Button>
+        <Button iconName={"basket"} info className="my-2">
+          Güncelle
         </Button>
         <Button
           iconName={"trash"}

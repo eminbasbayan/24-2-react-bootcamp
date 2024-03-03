@@ -6,6 +6,10 @@
   background-color: green !important;
 }
 
+.info {
+  background-color: rgb(37, 37, 255) !important;
+}
+
 button {
   font-size: 14px !important;
   display: flex;
