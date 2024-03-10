@@ -1,7 +1,10 @@
-import PropTypes from "prop-types";
+import { useContext } from "react";
 import { FaBagShopping } from "react-icons/fa6";
+import { CartContext } from "../../context/cart/CartContext";
 
-const Header = ({ cartItems }) => {
+const Header = () => {
+  const { cartItems } = useContext(CartContext);
+  
   return (
     <header className="fixed w-full top-0 left-0">
       <nav className="bg-white border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800">
@@ -118,7 +121,3 @@ const Header = ({ cartItems }) => {
 };
 
 export default Header;
-
-Header.propTypes = {
-  cartItems: PropTypes.array,
-};

@@ -4,10 +4,14 @@ import PropTypes from "prop-types";
 import Button from "../UI/Button";
 
 import "./ProductItem.css";
+import { useContext } from "react";
+import { CartContext } from "../../context/cart/CartContext";
 
 function ProductItem(props) {
+  const { setCartItems } = useContext(CartContext);
+
   function addToCart() {
-    props.setCartItems((cartItems) => {
+    setCartItems((cartItems) => {
       const findProduct = cartItems.find((cart) => cart._id === props.item._id);
       if (findProduct) {
         return cartItems.map((crtItem) => {
@@ -81,7 +85,6 @@ ProductItem.propTypes = {
   _id: PropTypes.string,
   handleDeleteItem: PropTypes.func,
   setIsUpdateMode: PropTypes.func,
-  setCartItems: PropTypes.func,
   handleUpdateClick: PropTypes.func,
   item: PropTypes.object,
 };
