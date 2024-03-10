@@ -1,13 +1,19 @@
 import { useContext } from "react";
 import { FaBagShopping } from "react-icons/fa6";
 import { CartContext } from "../../context/cart/CartContext";
+import { ThemeContext } from "../../context/theme/ThemeContext";
 
 const Header = () => {
   const { cartItems } = useContext(CartContext);
-  
+  const { theme, themeChangeHandler } = useContext(ThemeContext);
+
   return (
     <header className="fixed w-full top-0 left-0">
-      <nav className="bg-white border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800">
+      <nav
+        className={`${
+          theme === "dark" ? "dark:bg-gray-800 " : "bg-white"
+        }   border-gray-200 px-4 lg:px-6 py-2.5 `}
+      >
         <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
           <a href="https://flowbite.com" className="flex items-center">
             <img
@@ -25,6 +31,13 @@ const Header = () => {
               className="text-gray-800 dark:text-white hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800"
             >
               Log in
+            </a>
+            <a
+              href="#"
+              className="text-gray-800 dark:text-white hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800"
+              onClick={themeChangeHandler}
+            >
+              {theme === "dark" ? "Light Mode" : "Dark Mode"}
             </a>
             <button className="text-white bg-primary-700  focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm bg-transparent relative">
               <FaBagShopping />
