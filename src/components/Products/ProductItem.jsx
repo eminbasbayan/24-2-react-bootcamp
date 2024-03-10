@@ -6,6 +6,31 @@ import Button from "../UI/Button";
 import "./ProductItem.css";
 
 function ProductItem(props) {
+  function addToCart() {
+    props.setCartItems((cartItems) => {
+      const findProduct = cartItems.find((cart) => cart._id === props.item._id);
+      if (findProduct) {
+        return cartItems.map((crtItem) => {
+          if (crtItem._id === findProduct._id) {
+            return {
+              ...crtItem,
+              amount: crtItem.amount + 1,
+            };
+          }
+          return crtItem;
+        });
+      } else {
+        return [
+          {
+            ...props.item,
+            amount: 1,
+          },
+          ...cartItems,
+        ];
+      }
+    });
+  }
+
   return (
     <div className="product-item">
       <div className="product-image">
@@ -15,7 +40,12 @@ function ProductItem(props) {
         <span>{props.category}</span>
         <strong className="product-title">{props.title}</strong>
         <span className="product-price">{props.productPrice}₺</span>
-        <Button iconName={"basket"} success className={"mt-2"}>
+        <Button
+          iconName={"basket"}
+          success
+          className={"mt-2"}
+          onClick={addToCart}
+        >
           Sepete Ekle
         </Button>
         <Button
@@ -51,5 +81,7 @@ ProductItem.propTypes = {
   _id: PropTypes.string,
   handleDeleteItem: PropTypes.func,
   setIsUpdateMode: PropTypes.func,
+  setCartItems: PropTypes.func,
   handleUpdateClick: PropTypes.func,
+  item: PropTypes.object,
 };

@@ -1,8 +1,9 @@
+import { useState } from "react";
+import PropTypes from 'prop-types'
 import ProductItem from "./ProductItem";
+import FormProduct from "./AddNewProduct/FormProduct.jsx";
 import { productsData } from "../../get-all.js";
 import "./Products.css";
-import { useState } from "react";
-import FormProduct from "./AddNewProduct/FormProduct.jsx";
 
 const initialState = {
   title: "",
@@ -11,7 +12,7 @@ const initialState = {
   category: "",
 };
 
-function Products() {
+function Products({ setCartItems }) {
   const [productData, setProductData] = useState(productsData);
   const [isUpdateMode, setIsUpdateMode] = useState(false);
   const [updatingProductId, setUpdatingProductId] = useState(null);
@@ -64,9 +65,11 @@ function Products() {
               productTitle={pItem.title}
               productImage={pItem.img}
               productPrice={pItem.price}
+              item={pItem}
               category={pItem.category}
               handleDeleteItem={handleDeleteItem}
               setIsUpdateMode={setIsUpdateMode}
+              setCartItems={setCartItems}
               handleUpdateClick={handleUpdateClick}
               {...pItem}
             />
@@ -78,3 +81,12 @@ function Products() {
 }
 
 export default Products;
+
+ 
+
+ 
+Products.propTypes = {
+  setCartItems: PropTypes.func
+}
+
+ 

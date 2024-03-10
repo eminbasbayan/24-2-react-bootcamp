@@ -1,6 +1,7 @@
+import PropTypes from "prop-types";
 import { FaBagShopping } from "react-icons/fa6";
 
-const Header = () => {
+const Header = ({ cartItems }) => {
   return (
     <header>
       <nav className="bg-white border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800">
@@ -25,7 +26,7 @@ const Header = () => {
             <button className="text-white bg-primary-700  focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm bg-transparent relative">
               <FaBagShopping />
               <span className="absolute top-0 right-1 bg-red-600 w-4 h-4 flex items-center justify-center rounded-full text-[9px]">
-                0
+                {cartItems.length}
               </span>
             </button>
             <button
@@ -117,3 +118,7 @@ const Header = () => {
 };
 
 export default Header;
+
+Header.propTypes = {
+  cartItems: PropTypes.array,
+};
