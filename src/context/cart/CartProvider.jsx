@@ -7,6 +7,7 @@ function CartProvider(props) {
     <CartContext.Provider
       value={{
         fullName,
+        products: [1, 2, 3, 4],
       }}
     >
       {props.children}
