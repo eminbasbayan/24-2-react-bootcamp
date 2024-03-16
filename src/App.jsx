@@ -6,12 +6,27 @@ import Button from "./components/UI/Button";
 function App() {
   const [users, setUsers] = useState([]);
 
-  function fetchData() {
-    fetch("https://jsonplaceholder.typicode.com/users")
-      .then((res) => res.json())
-      .then((data) => setUsers(data));
+  // function fetchData() {
+  // fetch("https://jsonplaceholder.typicode.com/users")
+  //   .then((res) => res.json())
+  //   .then((data) => setUsers(data))
+  //   .catch((err) => console.log(err))
+  //   .finally(() => console.log("istek tamamlandı!"));
+
+  // }
+
+  async function fetchData() {
+    try {
+      const res = await fetch("https://jsonplaceholder.typicode.com/users");
+      const data = await res.json();
+      setUsers(data);
+    } catch (err) {
+      console.log(err);
+    } finally {
+      console.log("istek tamamlandı!");
+    }
   }
-  
+
   return (
     <div className="app">
       <Header />
