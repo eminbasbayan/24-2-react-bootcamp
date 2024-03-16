@@ -5,17 +5,11 @@ import Button from "./components/UI/Button";
 
 function App() {
   const [users, setUsers] = useState([]);
-
-  // function fetchData() {
-  // fetch("https://jsonplaceholder.typicode.com/users")
-  //   .then((res) => res.json())
-  //   .then((data) => setUsers(data))
-  //   .catch((err) => console.log(err))
-  //   .finally(() => console.log("istek tamamlandı!"));
-
-  // }
+  const [isLoading, setIsLoading] = useState(false);
 
   async function fetchData() {
+    setIsLoading(true);
+    setUsers([]);
     try {
       const res = await fetch("https://jsonplaceholder.typicode.com/users");
       const data = await res.json();
@@ -24,6 +18,7 @@ function App() {
       console.log(err);
     } finally {
       console.log("istek tamamlandı!");
+      setIsLoading(false);
     }
   }
 
@@ -32,6 +27,9 @@ function App() {
       <Header />
       <main className="content pt-16">
         <Button onClick={fetchData}>Fetch Data!</Button>
+        {isLoading && (
+          <div className="animate-spin h-5 w-5 mr-3 bg-white rounded-md my-4"></div>
+        )}
         {users.map((user) => (
           <p key={user.id}>{user.name}</p>
         ))}
