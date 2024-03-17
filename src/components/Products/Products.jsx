@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ProductItem from "./ProductItem";
 import FormProduct from "./AddNewProduct/FormProduct.jsx";
-import { productsData } from "../../get-all.js";
+import Spinner from "../UI/Spinner.jsx";
 import "./Products.css";
 
 const initialState = {
@@ -12,12 +12,31 @@ const initialState = {
 };
 
 function Products() {
-  const [productData, setProductData] = useState(productsData);
+  const [productData, setProductData] = useState([]);
   const [isUpdateMode, setIsUpdateMode] = useState(false);
   const [updatingProductId, setUpdatingProductId] = useState(null);
   const [productInput, setProductInput] = useState(initialState);
+  const [isLoading, setIsLoading] = useState(false);
 
-  console.log("re-rendered!");
+  async function fetchData() {
+    setIsLoading(true);
+    try {
+      const res = await fetch(
+        "https://fantastic-tick-fez.cyclic.app/api/products/get-all"
+      );
+      const data = await res.json();
+      setProductData(data);
+    } catch (err) {
+      console.log(err);
+    } finally {
+      console.log("istek tamamlandı!");
+      setIsLoading(false);
+    }
+  }
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   function handleDeleteItem(id) {
     const allProducts = productData;
@@ -58,6 +77,7 @@ function Products() {
         resetForm={resetForm}
         initialState={initialState}
       />
+      {isLoading && <Spinner />}
       <div className="products-wrapper">
         {productData.map((pItem) => {
           return (
