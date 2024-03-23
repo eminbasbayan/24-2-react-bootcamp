@@ -1,4 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
+import { arttir, azalt } from "../redux/actions/counterActions";
 
 function Counter() {
   const count = useSelector((state) => state.count);
@@ -7,8 +8,8 @@ function Counter() {
   return (
     <div>
       <p>{count}</p>
-      <button onClick={() => dispatch({ type: "arttir" })}>Arttır</button>
-      <button onClick={() => dispatch({ type: "azalt" })}>Azalt</button>
+      <button onClick={() => dispatch(arttir())}>Arttır</button>
+      <button onClick={() => dispatch(azalt())}>Azalt</button>
     </div>
   );
 }
