@@ -4,36 +4,40 @@ import PropTypes from "prop-types";
 import Button from "../UI/Button";
 
 import "./ProductItem.css";
-import { useContext } from "react";
-import { CartContext } from "../../context/cart/CartContext";
+
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart } from "../../redux/actions/cartActions";
 
 function ProductItem(props) {
-  const { setCartItems } = useContext(CartContext);
+  // const { setCartItems } = useContext(CartContext);
+  const cartItems = useSelector((state) => state.cart.cartItems);
+  const dispatch = useDispatch();
+  console.log(cartItems);
 
-  function addToCart() {
-    setCartItems((cartItems) => {
-      const findProduct = cartItems.find((cart) => cart._id === props.item._id);
-      if (findProduct) {
-        return cartItems.map((crtItem) => {
-          if (crtItem._id === findProduct._id) {
-            return {
-              ...crtItem,
-              amount: crtItem.amount + 1,
-            };
-          }
-          return crtItem;
-        });
-      } else {
-        return [
-          {
-            ...props.item,
-            amount: 1,
-          },
-          ...cartItems,
-        ];
-      }
-    });
-  }
+  // function addToCart() {
+  //   setCartItems((cartItems) => {
+  //     const findProduct = cartItems.find((cart) => cart._id === props.item._id);
+  //     if (findProduct) {
+  //       return cartItems.map((crtItem) => {
+  //         if (crtItem._id === findProduct._id) {
+  //           return {
+  //             ...crtItem,
+  //             amount: crtItem.amount + 1,
+  //           };
+  //         }
+  //         return crtItem;
+  //       });
+  //     } else {
+  //       return [
+  //         {
+  //           ...props.item,
+  //           amount: 1,
+  //         },
+  //         ...cartItems,
+  //       ];
+  //     }
+  //   });
+  // }
 
   return (
     <div className="product-item">
@@ -48,7 +52,7 @@ function ProductItem(props) {
           iconName={"basket"}
           success
           className={"mt-2"}
-          onClick={addToCart}
+          onClick={() => dispatch(addToCart(props.item))}
         >
           Sepete Ekle
         </Button>

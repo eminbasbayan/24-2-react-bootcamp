@@ -9,7 +9,7 @@ function App() {
       <main className="content pt-16">
         <Counter />
         <h1 className="mb-4">App Project</h1>
-        {/* <Products /> */}
+        <Products />
       </main>
     </div>
   );

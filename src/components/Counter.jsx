@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { arttir, azalt } from "../redux/actions/counterActions";
 
 function Counter() {
-  const count = useSelector((state) => state.count);
+  const count = useSelector((state) => state.counter.count);
   const dispatch = useDispatch();
 
   return (
