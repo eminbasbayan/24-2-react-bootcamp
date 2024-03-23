@@ -1,7 +1,7 @@
 import { createStore } from "redux";
 
 const initialState = {
-  count: 11110,
+  count: 0,
 };
 
 function counterReducer(state = initialState, action) {
@@ -9,6 +9,9 @@ function counterReducer(state = initialState, action) {
     case "arttir":
       return { count: state.count + 1 };
     case "azalt":
+      if (state.count === 0) {
+        return state;
+      }
       return { count: state.count - 1 };
 
     default:
