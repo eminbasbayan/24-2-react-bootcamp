@@ -1,7 +1,7 @@
 import { createStore } from "redux";
 
 const initialState = {
-  count: 0,
+  count: 11110,
 };
 
 function counterReducer(state = initialState, action) {
@@ -17,3 +17,5 @@ function counterReducer(state = initialState, action) {
 }
 
 const store = createStore(counterReducer);
+
+export default store;

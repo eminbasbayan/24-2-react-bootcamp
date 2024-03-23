@@ -1,40 +1,12 @@
-import { useReducer } from "react";
-
-function reducerFunc(state, action) {
-  switch (action.type) {
-    case "arttir":
-      return { ...state, counter: state.counter + 1 };
-    case "azalt":
-      if (state.counter === 0) {
-        return state;
-      }
-      return { ...state, counter: state.counter - 1 };
-    default:
-      return state;
-  }
-  // if (action.type === "arttir") {
-  //   return { ...state, counter: state.counter + 1 };
-  // } else if (action.type === "azalt") {
-  //   if (state.counter === 0) {
-  //     return state;
-  //   }
-  //   return { ...state, counter: state.counter - 1 };
-  // }
-  // return { ...state };
-}
-
-const initialState = {
-  counter: 0,
-  name: "Emin",
-};
+import { useSelector } from "react-redux";
 
 function Counter() {
-  const [state, dispatch] = useReducer(reducerFunc, initialState);
+  const count = useSelector((state) => state.count);
+
 
   return (
     <div>
-      <p>{state.name}</p>
-      <p>{state.counter}</p>
+      <p>{count}</p>
       <button onClick={() => dispatch({ type: "arttir" })}>Arttır</button>
       <button onClick={() => dispatch({ type: "azalt" })}>Azalt</button>
     </div>
