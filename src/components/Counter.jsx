@@ -1,15 +1,26 @@
 import { useReducer } from "react";
 
 function reducerFunc(state, action) {
-  if (action.type === "arttir") {
-    return { ...state, counter: state.counter + 1 };
-  } else if (action.type === "azalt") {
-    if (state.counter === 0) {
+  switch (action.type) {
+    case "arttir":
+      return { ...state, counter: state.counter + 1 };
+    case "azalt":
+      if (state.counter === 0) {
+        return state;
+      }
+      return { ...state, counter: state.counter - 1 };
+    default:
       return state;
-    }
-    return { ...state, counter: state.counter - 1 };
   }
-  return { ...state };
+  // if (action.type === "arttir") {
+  //   return { ...state, counter: state.counter + 1 };
+  // } else if (action.type === "azalt") {
+  //   if (state.counter === 0) {
+  //     return state;
+  //   }
+  //   return { ...state, counter: state.counter - 1 };
+  // }
+  // return { ...state };
 }
 
 const initialState = {
