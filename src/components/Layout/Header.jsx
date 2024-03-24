@@ -1,11 +1,9 @@
-import { useContext } from "react";
 import { FaBagShopping } from "react-icons/fa6";
-import { CartContext } from "../../context/cart/CartContext";
-import { ThemeContext } from "../../context/theme/ThemeContext";
+import { useSelector } from "react-redux";
 
 const Header = () => {
-  const { cartItems } = useContext(CartContext);
-  const { theme, themeChangeHandler } = useContext(ThemeContext);
+  const cartItems = useSelector((state) => state.cart.cartItems);
+  const theme = "dark";
 
   return (
     <header className="fixed w-full top-0 left-0">
@@ -35,7 +33,7 @@ const Header = () => {
             <a
               href="#"
               className="text-gray-800 dark:text-white hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800"
-              onClick={themeChangeHandler}
+              // onClick={themeChangeHandler}
             >
               {theme === "dark" ? "Light Mode" : "Dark Mode"}
             </a>

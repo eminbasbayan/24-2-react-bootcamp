@@ -1,43 +1,14 @@
-// import { useState } from "react";
 import PropTypes from "prop-types";
+import { useDispatch } from "react-redux";
 
 import Button from "../UI/Button";
 
+import { addToCart } from "../../redux-toolkit/slices/cartSlice";
+
 import "./ProductItem.css";
 
-import { useDispatch, useSelector } from "react-redux";
-import { addToCart } from "../../redux/actions/cartActions";
-
 function ProductItem(props) {
-  // const { setCartItems } = useContext(CartContext);
-  const cartItems = useSelector((state) => state.cart.cartItems);
   const dispatch = useDispatch();
-  console.log(cartItems);
-
-  // function addToCart() {
-  //   setCartItems((cartItems) => {
-  //     const findProduct = cartItems.find((cart) => cart._id === props.item._id);
-  //     if (findProduct) {
-  //       return cartItems.map((crtItem) => {
-  //         if (crtItem._id === findProduct._id) {
-  //           return {
-  //             ...crtItem,
-  //             amount: crtItem.amount + 1,
-  //           };
-  //         }
-  //         return crtItem;
-  //       });
-  //     } else {
-  //       return [
-  //         {
-  //           ...props.item,
-  //           amount: 1,
-  //         },
-  //         ...cartItems,
-  //       ];
-  //     }
-  //   });
-  // }
 
   return (
     <div className="product-item">
@@ -52,7 +23,7 @@ function ProductItem(props) {
           iconName={"basket"}
           success
           className={"mt-2"}
-          onClick={() => dispatch(addToCart(props.item))}
+          onClick={() => dispatch(addToCart({ item: props.item }))}
         >
           Sepete Ekle
         </Button>

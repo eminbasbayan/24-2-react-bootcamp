@@ -5,11 +5,11 @@ import Products from "./components/Products/Products";
 function App() {
   return (
     <div className="app">
-      {/* <Header /> */}
+      <Header />
       <main className="content pt-16">
         <Counter />
         <h1 className="mb-4">App Project</h1>
-        {/* <Products /> */}
+        <Products />
       </main>
     </div>
   );
