@@ -3,6 +3,8 @@ import ProductItem from "./ProductItem";
 import FormProduct from "./AddNewProduct/FormProduct.jsx";
 import Spinner from "../UI/Spinner.jsx";
 import "./Products.css";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchProducts } from "../../redux-toolkit/slices/productSlice.js";
 
 const initialState = {
   title: "",
@@ -16,27 +18,17 @@ function Products() {
   const [isUpdateMode, setIsUpdateMode] = useState(false);
   const [updatingProductId, setUpdatingProductId] = useState(null);
   const [productInput, setProductInput] = useState(initialState);
-  const [isLoading, setIsLoading] = useState(false);
+  const status = useSelector((state) => state.product.status);
+  const products = useSelector((state) => state.product.productData);
+  const dispatch = useDispatch();
 
-  async function fetchData() {
-    setIsLoading(true);
-    try {
-      const res = await fetch(
-        "https://fantastic-tick-fez.cyclic.app/api/products/get-all"
-      );
-      const data = await res.json();
-      setProductData(data);
-    } catch (err) {
-      console.log(err);
-    } finally {
-      console.log("istek tamamlandı!");
-      setIsLoading(false);
-    }
-  }
+
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    if (status === "idle") {
+      dispatch(fetchProducts());
+    }
+  }, [dispatch, status]);
 
   function handleDeleteItem(id) {
     const allProducts = productData;
@@ -77,9 +69,9 @@ function Products() {
         resetForm={resetForm}
         initialState={initialState}
       />
-      {isLoading && <Spinner />}
+      {status === "loading" && <Spinner />}
       <div className="products-wrapper">
-        {productData.map((pItem) => {
+        {products.map((pItem) => {
           return (
             <ProductItem
               key={pItem._id}
