@@ -1,15 +1,17 @@
 import { FaBagShopping } from "react-icons/fa6";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { themeChange } from "../../redux-toolkit/slices/themeSlice";
 
 const Header = () => {
   const cartItems = useSelector((state) => state.cart.cartItems);
-  const theme = "dark";
+  const theme = useSelector((state) => state.themeMode.theme);
+  const dispatch = useDispatch();
 
   return (
     <header className="fixed w-full top-0 left-0">
       <nav
         className={`${
-          theme === "dark" ? "dark:bg-gray-800 " : "bg-white"
+          theme ? "dark:bg-gray-800 " : "bg-white"
         }   border-gray-200 px-4 lg:px-6 py-2.5 `}
       >
         <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
@@ -33,7 +35,7 @@ const Header = () => {
             <a
               href="#"
               className="text-gray-800 dark:text-white hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800"
-              // onClick={themeChangeHandler}
+              onClick={() => dispatch(themeChange())}
             >
               {theme === "dark" ? "Light Mode" : "Dark Mode"}
             </a>
