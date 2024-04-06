@@ -1,5 +1,4 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import Header from "./components/Layout/Header";
 import HomePage from "./pages/HomePage";
 import ProductsPage from "./pages/ProductsPage";
 import CartPage from "./pages/CartPage";
@@ -12,21 +11,17 @@ function App() {
     },
     {
       path: "/products",
-      element: <ProductsPage />
+      element: <ProductsPage />,
     },
     {
       path: "/cart",
-      element: <CartPage />
+      element: <CartPage />,
     },
   ]);
 
   return (
     <div className="app">
-      <Header />
-      <main className="content pt-16">
-        <h1 className="mb-4">App Project</h1>
-        <RouterProvider router={router} />
-      </main>
+      <RouterProvider router={router} />
     </div>
   );
 }
