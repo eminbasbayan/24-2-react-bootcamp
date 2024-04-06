@@ -2,7 +2,6 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import ProductsPage from "./pages/ProductsPage";
 import CartPage from "./pages/CartPage";
-import Header from "./components/Layout/Header";
 
 function App() {
   const router = createBrowserRouter([
@@ -22,7 +21,6 @@ function App() {
 
   return (
     <div className="app">
-      <Header />
       <RouterProvider router={router} />
     </div>
   );

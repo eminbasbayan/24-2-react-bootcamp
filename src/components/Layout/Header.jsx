@@ -1,11 +1,41 @@
 import { FaBagShopping } from "react-icons/fa6";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { themeChange } from "../../redux-toolkit/slices/themeSlice";
+
+const navLinks = [
+  {
+    id: 1,
+    path: "/",
+    page: "Home",
+  },
+  {
+    id: 2,
+    path: "/products",
+    page: "Products",
+  },
+  {
+    id: 3,
+    path: "/cart",
+    page: "Cart",
+  },
+  {
+    id: 4,
+    path: "/about",
+    page: "About",
+  },
+];
 
 const Header = () => {
   const cartItems = useSelector((state) => state.cart.cartItems);
   const theme = useSelector((state) => state.themeMode.theme);
+  const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const handleRedirect = (e, pathName) => {
+    e.preventDefault();
+    navigate(pathName);
+  };
 
   return (
     <header className="fixed w-full top-0 left-0">
@@ -84,47 +114,18 @@ const Header = () => {
             id="mobile-menu-2"
           >
             <ul className="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
-              <li>
-                <a
-                  href="#"
-                  className="block py-2 pr-4 pl-3 text-white rounded bg-primary-700 lg:bg-transparent lg:text-primary-700 lg:p-0 dark:text-white"
-                  aria-current="page"
-                >
-                  Home
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
-                >
-                  Company
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
-                >
-                  Marketplace
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
-                >
-                  Features
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
-                >
-                  Team
-                </a>
-              </li>
+              {navLinks.map(({ id, path, page }) => (
+                <li key={id}>
+                  <a
+                    href="#"
+                    className="block py-2 pr-4 pl-3 text-white rounded bg-primary-700 lg:bg-transparent lg:text-primary-700 lg:p-0 dark:text-white"
+                    aria-current="page"
+                    onClick={(e) => handleRedirect(e, path)}
+                  >
+                    {page}
+                  </a>
+                </li>
+              ))}
             </ul>
           </div>
         </div>
