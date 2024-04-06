@@ -3,6 +3,8 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
   Route,
+  BrowserRouter,
+  Routes,
 } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import ProductsPage from "./pages/ProductsPage";
@@ -36,7 +38,14 @@ function App() {
 
   return (
     <div className="app">
-      <RouterProvider router={router} />
+      {/* <RouterProvider router={router} /> */}
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/products" element={<ProductsPage />} />
+          <Route path="/cart" element={<CartPage />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
