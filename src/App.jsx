@@ -1,15 +1,21 @@
-import Counter from "./components/Counter";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Header from "./components/Layout/Header";
-import Products from "./components/Products/Products";
+import HomePage from "./pages/HomePage";
 
 function App() {
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <HomePage />,
+    },
+  ]);
+
   return (
     <div className="app">
       <Header />
       <main className="content pt-16">
-        <Counter />
         <h1 className="mb-4">App Project</h1>
-        <Products />
+        <RouterProvider router={router} />
       </main>
     </div>
   );
