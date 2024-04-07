@@ -4,6 +4,7 @@ import ProductsPage from "./pages/ProductsPage";
 import CartPage from "./pages/CartPage";
 import MainLayout from "./layouts/MainLayout";
 import ErrorPage from "./pages/ErrorPage";
+import ProductDetailsPage from "./pages/ProductDetailsPage";
 
 function App() {
   const router = createBrowserRouter([
@@ -19,6 +20,10 @@ function App() {
         {
           path: "/products",
           element: <ProductsPage />,
+        },
+        {
+          path: "/product-details",
+          element: <ProductDetailsPage />,
         },
         {
           path: "/cart",
