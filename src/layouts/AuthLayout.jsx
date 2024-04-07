@@ -3,7 +3,7 @@ import Header from "../components/Layout/Header";
 
 const AuthLayout = () => {
   return (
-    <div>
+    <div className="auth-layout">
         <Header layout="auth" />
         <Outlet />
     </div>

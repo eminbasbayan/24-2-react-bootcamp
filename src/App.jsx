@@ -1,12 +1,13 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import { mainRoutes } from "./routes/mainRoutes";
-import { authRoutes } from "./routes/authRoutes";
-
+import { mainRoutes } from "./routes/MainRoutes";
+import { authRoutes } from "./routes/AuthRoutes";
+import { adminRoutes } from "./routes/AdminRoutes";
 
 function App() {
   const router = createBrowserRouter([
     ...mainRoutes,
-    ...authRoutes
+    ...authRoutes,
+    ...adminRoutes,
   ]);
 
   return (
