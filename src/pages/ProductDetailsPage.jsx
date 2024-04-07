@@ -1,11 +1,25 @@
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+
 const ProductDetailsPage = () => {
+  const [product, setProduct] = useState({});
+  const { id: productId } = useParams();
+
+  useEffect(() => {
+    (async () => {
+      const res = await fetch(`https://fakestoreapi.com/products/${productId}`);
+      const data = await res.json();
+      setProduct(data);
+    })();
+  }, [productId]);
+
   return (
     <div className="font-[sans-serif]">
       <div className="p-6 lg:max-w-7xl max-w-2xl max-lg:mx-auto">
         <div className="grid items-start grid-cols-1 lg:grid-cols-5 gap-12">
-          <div className="lg:col-span-3 bg-gray-100 w-full lg:sticky top-0 text-center p-8">
+          <div className="lg:col-span-3 bg-gray-100 w-full top-0 text-center p-8">
             <img
-              src="https://readymadeui.com/images/coffee1.webp"
+              src={product.image}
               alt="Product"
               className="w-4/5 rounded object-cover"
             />
@@ -35,10 +49,10 @@ const ProductDetailsPage = () => {
           </div>
           <div className="lg:col-span-2">
             <h2 className="text-2xl font-extrabold text-gray-200">
-              Espresso Elegante | Coffee
+              {product.title}
             </h2>
             <div className="flex flex-wrap gap-4 mt-4">
-              <p className="text-gray-200 text-xl font-bold">$12</p>
+              <p className="text-gray-200 text-xl font-bold">${product.price}</p>
               <p className="text-gray-400 text-xl">
                 <strike>$16</strike>{" "}
                 <span className="text-sm ml-1">Tax included</span>

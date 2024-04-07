@@ -4,7 +4,7 @@ export const fetchProducts = createAsyncThunk(
   "products/fetchProducts",
   async () => {
     const res = await fetch(
-      "https://fantastic-tick-fez.cyclic.app/api/products/get-all"
+      "https://fakestoreapi.com/products"
     );
     const data = await res.json();
 

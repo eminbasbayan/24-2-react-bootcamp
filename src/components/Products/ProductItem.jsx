@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 import Button from "../UI/Button";
 
@@ -9,15 +10,20 @@ import "./ProductItem.css";
 
 function ProductItem(props) {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   return (
     <div className="product-item">
       <div className="product-image">
-        <img src={props.productImage} alt="image" />
+        <img src={props.image} alt="image" className="!h-40" />
       </div>
       <div className="product-info">
         <span>{props.category}</span>
-        <strong className="product-title">{props.title}</strong>
+        <strong className="product-title hover:text-red-600 cursor-pointer" onClick={
+          ()=> navigate(`/products/${props.id}`)
+        }>
+          {props.title.substring(0, 15)}
+        </strong>
         <span className="product-price">{props.productPrice}₺</span>
         <Button
           iconName={"basket"}
@@ -55,9 +61,11 @@ ProductItem.propTypes = {
   productPrice: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   parentTitle: PropTypes.string,
   title: PropTypes.string,
+  image: PropTypes.string,
   category: PropTypes.string,
   setParentTitle: PropTypes.func,
   _id: PropTypes.string,
+  id: PropTypes.number,
   handleDeleteItem: PropTypes.func,
   setIsUpdateMode: PropTypes.func,
   handleUpdateClick: PropTypes.func,

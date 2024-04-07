@@ -74,7 +74,7 @@ function Products() {
         {products.map((pItem) => {
           return (
             <ProductItem
-              key={pItem._id}
+              key={pItem.id}
               productTitle={pItem.title}
               productImage={pItem.img}
               productPrice={pItem.price}
