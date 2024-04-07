@@ -1,5 +1,5 @@
 import { FaBagShopping } from "react-icons/fa6";
-import { useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { themeChange } from "../../redux-toolkit/slices/themeSlice";
 
@@ -29,13 +29,7 @@ const navLinks = [
 const Header = () => {
   const cartItems = useSelector((state) => state.cart.cartItems);
   const theme = useSelector((state) => state.themeMode.theme);
-  const navigate = useNavigate();
   const dispatch = useDispatch();
-
-  const handleRedirect = (e, pathName) => {
-    e.preventDefault();
-    navigate(pathName);
-  };
 
   return (
     <header className="fixed w-full top-0 left-0">
@@ -116,14 +110,21 @@ const Header = () => {
             <ul className="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
               {navLinks.map(({ id, path, page }) => (
                 <li key={id}>
-                  <a
-                    href="#"
-                    className="block py-2 pr-4 pl-3 text-white rounded bg-primary-700 lg:bg-transparent lg:text-primary-700 lg:p-0 dark:text-white"
+                  <NavLink
+                    to={path}
+                    className={({ isActive }) =>
+                      `block py-2 pr-4 pl-3  rounded bg-primary-700 lg:bg-transparent lg:text-primary-700 lg:p-0
+                      ${
+                        isActive
+                          ? "text-red-700 dark:text-red-700"
+                          : "text-white dark:text-white"
+                      }
+                      `
+                    }
                     aria-current="page"
-                    onClick={(e) => handleRedirect(e, path)}
                   >
                     {page}
-                  </a>
+                  </NavLink>
                 </li>
               ))}
             </ul>
