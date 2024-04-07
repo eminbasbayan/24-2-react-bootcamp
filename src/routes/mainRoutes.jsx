@@ -32,6 +32,13 @@ export const mainRoutes = [
       {
         path: "/products/:id",
         element: <ProductDetailsPage />,
+        loader: async ({ params }) => {
+          const res = await fetch(
+            `https://fakestoreapi.com/products/${params.id}`
+          );
+          const data = await res.json();
+          return data;
+        },
       },
       {
         path: "/cart",

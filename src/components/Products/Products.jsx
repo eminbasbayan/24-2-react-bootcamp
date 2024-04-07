@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import PropTypes from "prop-types";
 import ProductItem from "./ProductItem";
 import FormProduct from "./AddNewProduct/FormProduct.jsx";
 import Spinner from "../UI/Spinner.jsx";
@@ -90,4 +91,7 @@ function Products({ products }) {
   );
 }
 
+Products.propTypes = {
+  products: PropTypes.array,
+};
 export default Products;

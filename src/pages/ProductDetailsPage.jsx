@@ -1,17 +1,8 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useLoaderData } from "react-router-dom";
 
 const ProductDetailsPage = () => {
-  const [product, setProduct] = useState({});
-  const { id: productId } = useParams();
-
-  useEffect(() => {
-    (async () => {
-      const res = await fetch(`https://fakestoreapi.com/products/${productId}`);
-      const data = await res.json();
-      setProduct(data);
-    })();
-  }, [productId]);
+  // const [product, setProduct] = useState({});
+  const product = useLoaderData();
 
   return (
     <div className="font-[sans-serif]">
@@ -52,7 +43,9 @@ const ProductDetailsPage = () => {
               {product.title}
             </h2>
             <div className="flex flex-wrap gap-4 mt-4">
-              <p className="text-gray-200 text-xl font-bold">${product.price}</p>
+              <p className="text-gray-200 text-xl font-bold">
+                ${product.price}
+              </p>
               <p className="text-gray-400 text-xl">
                 <strike>$16</strike>{" "}
                 <span className="text-sm ml-1">Tax included</span>
