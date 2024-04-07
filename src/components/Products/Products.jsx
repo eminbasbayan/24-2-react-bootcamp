@@ -13,16 +13,14 @@ const initialState = {
   category: "",
 };
 
-function Products() {
+function Products({ products }) {
   const [productData, setProductData] = useState([]);
   const [isUpdateMode, setIsUpdateMode] = useState(false);
   const [updatingProductId, setUpdatingProductId] = useState(null);
   const [productInput, setProductInput] = useState(initialState);
   const status = useSelector((state) => state.product.status);
-  const products = useSelector((state) => state.product.productData);
+  // const products = useSelector((state) => state.product.productData);
   const dispatch = useDispatch();
-
-
 
   useEffect(() => {
     if (status === "idle") {
