@@ -3,6 +3,7 @@ import counterReducer from "./slices/counterSlice";
 import cartReducer from "./slices/cartSlice";
 import themeReducer from "./slices/themeSlice";
 import productReducer from "./slices/productSlice";
+import authReducer from "./slices/authSlice";
 
 const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ const store = configureStore({
     cart: cartReducer,
     themeMode: themeReducer,
     product: productReducer,
+    auth: authReducer,
   },
 });
 

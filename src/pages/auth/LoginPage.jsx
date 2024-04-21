@@ -1,21 +1,25 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { login } from "../../firebaseConfig";
 import { toast } from "react-toastify";
+import { useDispatch, useSelector } from "react-redux";
+import { loginUser } from "../../redux-toolkit/slices/authSlice";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("admin@gmail.com");
   const [password, setPassword] = useState("admin1");
+  const { isLoading } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(email);
+    console.log(password);
+    dispatch(loginUser({ email, password }));
     try {
-      const user = await login(email, password);
-      console.log("Logged in user:", user);
       toast("Giriş Başarılı. Ana Sayfaya Yönlendiriliyorsunuz!", {
         position: "top-right",
-        autoClose: 5000,
+        autoClose: 2000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -119,6 +123,7 @@ const LoginPage = () => {
               >
                 Sign in
               </button>
+              {isLoading && <p>Giriş Yapılıyor!</p>}
               <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                 Don’t have an account yet?{" "}
                 <Link
