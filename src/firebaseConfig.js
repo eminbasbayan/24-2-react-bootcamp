@@ -1,4 +1,5 @@
 import { initializeApp } from "firebase/app";
+import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDmuKxayJh3agu-xjI-b5N0wcEtmnjTQBA",
@@ -7,10 +8,18 @@ const firebaseConfig = {
   storageBucket: "e-commerce-fd2b9.appspot.com",
   messagingSenderId: "275155662225",
   appId: "1:275155662225:web:b511d4a67ca3fc32309630",
-  measurementId: "G-GNMDHC69LH"
+  measurementId: "G-GNMDHC69LH",
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+const auth = getAuth();
+
+const register = async (email, password) => {
+  const { user } = await createUserWithEmailAndPassword(auth, email, password);
+  return user;
+};
+
+export { register };
 
 export default app;
