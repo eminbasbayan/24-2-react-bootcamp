@@ -4,7 +4,7 @@ import {
   getAuth,
   signInWithEmailAndPassword,
 } from "firebase/auth";
-import { getFirestore } from "firebase/firestore";
+import { doc, getFirestore, setDoc } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDmuKxayJh3agu-xjI-b5N0wcEtmnjTQBA",
@@ -21,9 +21,28 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth();
 const db = getFirestore(app);
 
-const register = async (email, password) => {
-  const { user } = await createUserWithEmailAndPassword(auth, email, password);
-  return user;
+const register = async (email, password, role = "user") => {
+  try {
+    const userCredential = await createUserWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+    const user = userCredential.user;
+
+    // Firestore veritabanına kullanıcı bilgilerini kaydet
+    const userDoc = doc(db, "users", user.uid);
+    await setDoc(userDoc, {
+      email: email,
+      role: role,
+    });
+
+    console.log("User registered with role:", role);
+    return user;
+  } catch (error) {
+    console.error("Registration error:", error);
+    throw error;
+  }
 };
 
 const login = async (email, password) => {
