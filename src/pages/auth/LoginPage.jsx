@@ -13,12 +13,10 @@ const LoginPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(email);
-    console.log(password);
     dispatch(loginUser({ email, password }));
     try {
       toast("Giriş Başarılı. Ana Sayfaya Yönlendiriliyorsunuz!", {
-        position: "top-right",
+        position: "top-left",
         autoClose: 2000,
         hideProgressBar: false,
         closeOnClick: true,

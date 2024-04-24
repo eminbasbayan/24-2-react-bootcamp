@@ -38,6 +38,6 @@ const login = async (email, password) => {
   }
 };
 
-export { register, login };
+export { register, login, auth };
 
 export default app;

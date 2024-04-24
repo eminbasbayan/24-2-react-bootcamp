@@ -30,7 +30,7 @@ const navLinks = [
 const Header = ({ layout }) => {
   const cartItems = useSelector((state) => state.cart.cartItems);
   const theme = useSelector((state) => state.themeMode.theme);
-  const { user } = useSelector((state) => state.auth);
+  const { user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
   if (layout === "main") {
@@ -53,7 +53,14 @@ const Header = ({ layout }) => {
               </span>
             </a>
             <div className="flex items-center lg:order-2">
-              {!user && (
+              {user ? (
+                <a
+                  href="#"
+                  className="text-gray-800 dark:text-white hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800"
+                >
+                  Log out
+                </a>
+              ) : (
                 <Link
                   to="/auth/login"
                   className="text-gray-800 dark:text-white hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800"
