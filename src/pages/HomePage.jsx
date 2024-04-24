@@ -4,17 +4,25 @@ import {
   deleteDoc,
   doc,
   getDocs,
+  updateDoc,
 } from "firebase/firestore";
 import { db } from "../firebaseConfig";
 import { useState } from "react";
 
+const initialValues = {
+  id: "",
+  name: "",
+  price: "",
+};
+
 const HomePage = () => {
   const [firebaseData, setFirebaseData] = useState([]);
+  const [editForm, setEditForm] = useState(initialValues);
 
   const addData = async () => {
     try {
       const docRef = await addDoc(collection(db, "urunlerim"), {
-        name: "Tişört",
+        name: "Şapka",
         price: 400,
       });
       console.log(docRef.id);
@@ -51,6 +59,21 @@ const HomePage = () => {
     }
   };
 
+  const updateData = async () => {
+    const productRef = doc(db, "urunlerim", editForm.id);
+    try {
+      await updateDoc(productRef, {
+        name: editForm.name,
+        price: Number(editForm.price),
+      });
+      console.log("ürün silindi");
+      getData();
+      setEditForm(initialValues);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className="home-page">
       <h1 className="mb-4">Home Page</h1>
@@ -60,11 +83,40 @@ const HomePage = () => {
         <div key={item.id} className="flex items-center gap-4 mt-4">
           <p>{item.name}</p>
           <b>{item.price} $</b>
+          <button
+            className="bg-blue-700"
+            onClick={() =>
+              setEditForm({ id: item.id, name: item.name, price: item.price })
+            }
+          >
+            Edit
+          </button>
           <button className="bg-red-700" onClick={() => deleteData(item.id)}>
             Delete
           </button>
         </div>
       ))}
+      {editForm.id && (
+        <div>
+          <input
+            type="text"
+            value={editForm.name}
+            onChange={(e) =>
+              setEditForm((prev) => ({ ...prev, name: e.target.value }))
+            }
+          />
+          <input
+            type="number"
+            value={editForm.price}
+            onChange={(e) =>
+              setEditForm((prev) => ({ ...prev, price: e.target.value }))
+            }
+          />
+          <button className="bg-blue-600" onClick={updateData}>
+            Update
+          </button>
+        </div>
+      )}
     </div>
   );
 };
