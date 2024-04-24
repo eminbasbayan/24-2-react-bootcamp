@@ -3,6 +3,9 @@ import { FaBagShopping } from "react-icons/fa6";
 import { Link, NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { themeChange } from "../../redux-toolkit/slices/themeSlice";
+import { signOut } from "firebase/auth";
+import { auth } from "../../firebaseConfig";
+import { clearUser } from "../../redux-toolkit/slices/userSlice";
 
 const navLinks = [
   {
@@ -33,6 +36,15 @@ const Header = ({ layout }) => {
   const { user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
+  const handleLogout = () => {
+    signOut(auth)
+      .then(() => {
+        console.log("çıkış işlemi başarılı!");
+        dispatch(clearUser());
+      })
+      .catch((error) => console.log(error));
+  };
+
   if (layout === "main") {
     return (
       <header className="fixed w-full top-0 left-0">
@@ -54,12 +66,13 @@ const Header = ({ layout }) => {
             </a>
             <div className="flex items-center lg:order-2">
               {user ? (
-                <a
-                  href="#"
+                <button
+                  
+                  onClick={handleLogout}
                   className="text-gray-800 dark:text-white hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800"
                 >
                   Log out
-                </a>
+                </button>
               ) : (
                 <Link
                   to="/auth/login"
