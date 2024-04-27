@@ -1,36 +1,50 @@
-import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../../redux-toolkit/slices/authSlice";
 
+const inputClass =
+  "bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500";
+
 const LoginPage = () => {
-  const [email, setEmail] = useState("admin@gmail.com");
-  const [password, setPassword] = useState("admin1");
   const { isLoading } = useSelector((state) => state.auth);
+  const { user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    dispatch(loginUser({ email, password }));
-    try {
-      toast("Giriş Başarılı. Ana Sayfaya Yönlendiriliyorsunuz!", {
-        position: "top-left",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-        type: "success",
-      });
-      navigate("/");
-    } catch (error) {
-      console.error("Authentication error:", error);
-    }
-  };
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    validationSchema: Yup.object({
+      email: Yup.string()
+        .required("Zorunlu Alan!")
+        .email("Geçerli bir e-mail giriniz!"),
+      password: Yup.string()
+        .required("Zorunlu Alan!")
+        .min(6, "Şifre en az 6 karakter olmalı!"),
+    }),
+    onSubmit: (values) => {
+      dispatch(loginUser({ email: values.email, password: values.password }));
+      if (user) {
+        toast("Giriş Başarılı. Ana Sayfaya Yönlendiriliyorsunuz!", {
+          position: "top-left",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          type: "success",
+        });
+        navigate("/");
+      }
+    },
+  });
 
   return (
     <section className="bg-gray-50 dark:bg-gray-900">
@@ -51,7 +65,10 @@ const LoginPage = () => {
             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
               Sign in to your account
             </h1>
-            <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
+            <form
+              className="space-y-4 md:space-y-6"
+              onSubmit={formik.handleSubmit}
+            >
               <div>
                 <label
                   htmlFor="email"
@@ -63,12 +80,15 @@ const LoginPage = () => {
                   type="email"
                   name="email"
                   id="email"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  className={inputClass}
                   placeholder="name@company.com"
-                  required=""
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  value={formik.values.email}
+                  onBlur={formik.handleBlur}
+                  onChange={formik.handleChange}
                 />
+                {formik.touched.email && formik.errors.email && (
+                  <small className="text-red-600">{formik.errors.email}</small>
+                )}
               </div>
               <div>
                 <label
@@ -82,11 +102,16 @@ const LoginPage = () => {
                   name="password"
                   id="password"
                   placeholder="••••••••"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  required=""
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  className={inputClass}
+                  value={formik.values.password}
+                  onBlur={formik.handleBlur}
+                  onChange={formik.handleChange}
                 />
+                {formik.touched.password && formik.errors.password && (
+                  <small className="text-red-600">
+                    {formik.errors.password}
+                  </small>
+                )}
               </div>
               <div className="flex items-center justify-between">
                 <div className="flex items-start">
