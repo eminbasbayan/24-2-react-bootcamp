@@ -1,3 +1,4 @@
+import React from "react";
 import PropTypes from "prop-types";
 
 const Button = (props) => {
@@ -11,4 +12,6 @@ Button.propTypes = {
   onClick: PropTypes.func,
 };
 
-export default Button;
+const Memoized = React.memo(Button);
+
+export default Memoized;

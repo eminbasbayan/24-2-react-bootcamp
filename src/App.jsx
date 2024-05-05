@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import Button from "./components/Button";
 import MyElement from "./components/MyElement";
 
@@ -7,9 +7,9 @@ function App() {
 
   console.log("app çalıştı!");
 
-  const toggleParagraphHandler = () => {
+  const toggleParagraphHandler = useCallback(() => {
     setToggleParagraph((prevState) => !prevState);
-  };
+  }, []);
 
   return (
     <div className="app">
@@ -19,5 +19,7 @@ function App() {
     </div>
   );
 }
+
+ // props.onClick === props.prev.onClick
 
 export default App;
