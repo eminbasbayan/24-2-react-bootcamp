@@ -1,23 +1,21 @@
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import { mainRoutes } from "./routes/MainRoutes";
-import { authRoutes } from "./routes/AuthRoutes";
-import { adminRoutes } from "./routes/AdminRoutes";
-import { ToastContainer } from "react-toastify";
-import { useAuthChecker } from "./hooks/AuthChecker";
+import { useState } from "react";
+import Button from "./components/Button";
+import MyElement from "./components/MyElement";
 
 function App() {
-  useAuthChecker();
-  
-  const router = createBrowserRouter([
-    ...mainRoutes,
-    ...authRoutes,
-    ...adminRoutes,
-  ]);
+  const [toggleParagraph, setToggleParagraph] = useState(false);
+
+  console.log("app çalıştı!");
+
+  const toggleParagraphHandler = () => {
+    setToggleParagraph((prevState) => !prevState);
+  };
 
   return (
     <div className="app">
-      <RouterProvider router={router} />
-      <ToastContainer />
+      <h1>Hello</h1>
+      <MyElement show={false} />
+      <Button onClick={toggleParagraphHandler}>Toggle Paragraph</Button>
     </div>
   );
 }
